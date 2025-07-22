@@ -1,10 +1,19 @@
+/* src/components/Square.css */
 .square {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.square:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+  z-index: 1;
 }
 
 .square.light {
@@ -16,5 +25,58 @@
 }
 
 .square.selected {
-  background-color: rgba(20, 85, 30, 0.5);
+  background-color: rgba(46, 204, 113, 0.5);
+  box-shadow: inset 0 0 0 2px #2ecc71;
+}
+
+.square.last-move {
+  background-color: rgba(241, 196, 15, 0.5);
+}
+
+.square.possible-move {
+  background-color: rgba(46, 204, 113, 0.3);
+}
+
+.square::before {
+  position: absolute;
+  content: attr(data-col);
+  bottom: 2px;
+  left: 2px;
+  font-size: 10px;
+  color: inherit;
+  opacity: 0.7;
+  font-weight: bold;
+}
+
+.square::after {
+  position: absolute;
+  content: attr(data-row);
+  top: 2px;
+  right: 2px;
+  font-size: 10px;
+  color: inherit;
+  opacity: 0.7;
+  font-weight: bold;
+}
+
+.square.light::before,
+.square.light::after {
+  color: #b58863;
+}
+
+.square.dark::before,
+.square.dark::after {
+  color: #f0d9b5;
+}
+
+@media (max-width: 600px) {
+  .square {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .square::before,
+  .square::after {
+    font-size: 8px;
+  }
 }
